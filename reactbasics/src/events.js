@@ -7,6 +7,7 @@ function App() {
   const handleClick = () =>{
     setCount(count+1)
   }
+  
   return (
     <div className="App">
      <h1>Button Click Event</h1>
