@@ -6,15 +6,160 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <h1>Concatenation of the two strings</h1>
 
-    <script>
+    <!-- <script>
       var a;
       var b = 2;
       document.write(a);
       document.write("<br>");  // Adds a line break
       document.write(b);
+    </script> -->
+
+    <!-- <script>
+      var a = 3;
+      var b = 17;
+      var c = 12;
+      a = a+12;
+      b = 3+b;
+      c = c+7;
+      document.write(a);
+      document.write("<br>")
+      document.write(b);
+
+
+    </script> -->
+
+    <script>
+      var ourStr = "I come first."+"I come second";
+      document.write(ourStr)
+      var length = ourStr.length;
+      document.write("<br>");
+      document.write("length->"+length);
+      var firstChar = ourStr[0];
+      document.write("firstChar->"+firstChar);
+
+      let str = "hello";
+      str[0] = "H"; // This won't change the string
+      document.write("<br>")
+      document.write(str); // Output: "hello"
+
+
+      document.write("<br>")
+      document.write(str[str.length-1]);
+
+
+      document.write("<br>")
+      // Array
+      var ourArray = ["John",23]
+      for(let val of ourArray){
+        document.write(val)+" ";
+      }
+
+      document.write("<br>")
+      //pop operation
+      var ourArray = [1,2,3,4];
+      var removedLastElement = ourArray.pop();
+      document.write(removedLastElement)
+
+
+      document.write("<br>")
+      // List of lists
+      var myList = [["cereal",3],["milk",2],["banana",3]]
+      document.write(myList[0][0])
+
+      document.write("<br>")
+      // Reusable function
+      function ourReusableFunction(){
+        document.write("Hello Abhishek");
+      }
+      ourReusableFunction();
+
+      document.write("<br>")
+      var outerWear = "T-Shirt";
+      function myOutfit(){
+        var outerWear = "sweater"
+        return outerWear;
+      }
+      document.write(myOutfit())
+
+      document.write("<br>")
+
+      // Add an element into the array
+      function nextInLine(arr,item){
+        arr.push(item)
+        return item;
+      }
+      var testArr = [1,2,3,4,5,6]
+      document.write(nextInLine(testArr,6))
+      document.write("After"+JSON.stringify(testArr))
+      document.write("<br>")
+      document.write(typeof(testArr))
+
+      document.write("<br>")
+      // working with the array
+      var myArray = [];
+      var i = 0;
+      while(i<5){
+        myArray.push(i);
+        i++;
+      }
+      document.write(myArray)
+
+      // for loop in javascript
+      var array  = []
+      for(var i=0;i<10;i+=2){
+        array.push(i);
+      }
+      document.write(array)
+
+      document.write("<br>")
+      // String to integer
+      function convertToInteger(str){
+        return parseInt(str,8);
+      }
+      document.write(typeof(convertToInteger("56")))
+
+      //var is defined globally while let is defined only block scope.
+
+      //anonyms function 
+      document.write("<br>")
+      var myConcat = (arr1,arr2)=>{
+        return arr1.concat(arr2);
+      }
+      document.write(myConcat([1,2,3],[4,5,6,7]))
+
+      document.write("<br>")
+      //map function and arrow function
+      const realNumberArray = [4,5.6,-9.8,3.14,42,6,8]
+      const squareList = (arr)=>{
+        const squaredInteger = arr.filter(num=>Number.isInteger(num)&&num>0).map(x=>x*x)
+        return squaredInteger;
+      }
+      const squaredIntegers = squareList(realNumberArray);
+      document.write(squaredIntegers)
+
+      document.write("<br>")
+      // return the argument sum
+      function sum(...args) {
+        return args.reduce((acc,num)=>(acc+num))
+      }
+
+      const numbers = [1, 2, 3, 4, 5, 6];
+
+      document.write(sum(...numbers)); // Expected output: 3
+
+      // using backticks
+      document.write("<br>");
+      const person = {
+        name:"Abhishek Rana",
+        age:23
+      }
+      const greeting = `Hello, my name is ${person.name}!`
+      document.write(greeting);
     </script>
+
+    
 
 
 </body>
