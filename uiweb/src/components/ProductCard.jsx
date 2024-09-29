@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import './ProductCard.css'
 import Product from './Product'
 
@@ -246,13 +246,29 @@ const productList = [
   }
 ]
 const ProductCard = () => {
-  const[listOfProduct,setListOfProduct] = useState(productList)
+  const[listOfProduct,setListOfProduct] = useState([])
   const topRatedProducts = ()=>{
     // console.log("before filter->",listOfProduct)
     let filteredproduct = listOfProduct.filter(product=>product.rating.rate>=4)
     setListOfProduct(filteredproduct)
     // console.log("After filter->",listOfProduct)
   }
+
+  // calling the api in React
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://fakestoreapi.com/products');
+      const resData = await response.json();
+      console.log(resData);
+      setListOfProduct(resData)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div>
         <button onClick={topRatedProducts} style={{marginTop:"10px"}}>Top rated button</button>
