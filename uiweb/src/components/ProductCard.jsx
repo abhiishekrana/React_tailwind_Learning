@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import './ProductCard.css'
 import Product from './Product'
+import Skeleton from './Skeleton'
 
 
 const productList = [
@@ -247,6 +248,8 @@ const productList = [
 ]
 const ProductCard = () => {
   const[listOfProduct,setListOfProduct] = useState([])
+  const[filterProduct,setFilterProduct] = useState([])
+  const[searchText,setSearchText] = useState("")
   const topRatedProducts = ()=>{
     // console.log("before filter->",listOfProduct)
     let filteredproduct = listOfProduct.filter(product=>product.rating.rate>=4)
@@ -261,6 +264,7 @@ const ProductCard = () => {
       const resData = await response.json();
       console.log(resData);
       setListOfProduct(resData)
+      setFilterProduct(resData)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -269,13 +273,27 @@ const ProductCard = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  return (
+
+  // if(listOfProduct.length==0){
+  //   return <Skeleton/>
+  // }
+  return listOfProduct.length===0?<Skeleton/>:(
+
     <div>
+      <div style={{marginTop:"10px"}}>
+        <input type="text" onChange={(e)=>setSearchText(e.target.value)}  value={searchText}/>
+        <button onClick={()=>{
+          const filteredData = listOfProduct.filter((product)=>{
+            return product.title.toLowerCase().includes(searchText.toLowerCase())
+          });
+          setFilterProduct(filteredData)
+        }}>Search</button>
+      </div>
         <button onClick={topRatedProducts} style={{marginTop:"10px"}}>Top rated button</button>
     <div className='product_card'>
 {/* <Product itsMyChoice={productList} /> */}
     {
-      listOfProduct.map((product,index)=>{
+      filterProduct.map((product,index)=>{
         return (
           <Product key ={product.id} itsMyChoice={product}/>
         )
