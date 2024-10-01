@@ -2,7 +2,6 @@ import React from 'react'
 import './Product.css'
 const Product = (props) => {
   const{image,rating,price,title} = props.itsMyChoice
-  console.log("props->",props)
   return (
     <div className='product'>
       

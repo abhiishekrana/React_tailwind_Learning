@@ -262,7 +262,7 @@ const ProductCard = () => {
     try {
       const response = await fetch('https://fakestoreapi.com/products');
       const resData = await response.json();
-      console.log(resData);
+
       setListOfProduct(resData)
       setFilterProduct(resData)
     } catch (error) {
