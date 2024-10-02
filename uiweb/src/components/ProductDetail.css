@@ -1,0 +1,10 @@
+.product{
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+    padding-top: 20px;
+    border: 1px solid black;
+}
+.product_img{
+width: 100px;
+}

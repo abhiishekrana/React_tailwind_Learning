@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import './ProductCard.css'
 import Product from './Product'
 import Skeleton from './Skeleton'
-
+import {Link} from "react-router-dom"
 
 const productList = [
   {
@@ -294,9 +294,9 @@ const ProductCard = () => {
 {/* <Product itsMyChoice={productList} /> */}
     {
       filterProduct.map((product,index)=>{
-        return (
-          <Product key ={product.id} itsMyChoice={product}/>
-        )
+        return <Link key ={product.id} to={`/product/${product.id}`}>(
+          <Product  itsMyChoice={product}/>
+        )</Link>
       })
     }
     </div>
