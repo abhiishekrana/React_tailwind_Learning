@@ -6,6 +6,7 @@ import Error from './components/Error';
 import Kid from './components/Kid';
 import Men from './components/Men';
 import ProductDeatail from './components/ProductDeatail';
+import About from './components/About';
 
 function App() {
   return (
@@ -28,6 +29,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/kid",
         element: <Kid />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/men",
