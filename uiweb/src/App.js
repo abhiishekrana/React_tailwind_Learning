@@ -56,3 +56,8 @@ const Root = () => {
 
 // Export the functional component
 export default Root;
+
+
+// React CleanUp
+// it is used when our component is not used 
+// properly
