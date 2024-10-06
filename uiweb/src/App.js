@@ -1,4 +1,5 @@
 import './App.css';
+import { Suspense,lazy } from 'react';
 import Navbar from './components/Navbar';
 import ProductCard from './components/ProductCard';
 import { createBrowserRouter, RouterProvider,Outlet } from 'react-router-dom';
@@ -7,7 +8,9 @@ import Kid from './components/Kid';
 import Men from './components/Men';
 import ProductDeatail from './components/ProductDeatail';
 import About from './components/About';
+// import Grocery from './components/Grocery';
 
+const Grocery = lazy(()=>import('./components/Grocery'))
 function App() {
   return (
     <div className="App">
@@ -33,6 +36,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/grocery",
+        element:<Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense> ,
       },
       {
         path: "/men",
