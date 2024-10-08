@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import './ProductCard.css'
+// import './ProductCard.css'
 import Product from './Product'
 import Skeleton from './Skeleton'
 import {Link} from "react-router-dom"

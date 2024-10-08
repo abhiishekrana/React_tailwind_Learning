@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import { Suspense,lazy } from 'react';
 import Navbar from './components/Navbar';
 import ProductCard from './components/ProductCard';

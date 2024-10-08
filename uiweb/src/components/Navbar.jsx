@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import './Navbar.css'
+// import './Navbar.css'
 import {Link} from "react-router-dom"
 const Navbar = () => {
   const[light,setLight] = useState("Light")
@@ -17,7 +17,7 @@ const Navbar = () => {
   },[])
   return (
     
-    <div className='navbar'>
+    <div className="flex">
       <h1>LOGO</h1>
       <ul className='menu_items'>
         <li><Link to="/men">Men</Link></li>
