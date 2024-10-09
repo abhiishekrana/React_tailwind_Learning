@@ -17,17 +17,16 @@ const Navbar = () => {
   },[])
   return (
     
-    <div className="flex">
-      <h1>LOGO</h1>
-      <ul className='menu_items'>
+    <div className="flex justify-between mx-10 shadow-md my-10">
+      <h1 className='font-bold text-2xl'>AJIO</h1> 
+      <ul className='flex justify-between w-[40%]'>
         <li><Link to="/men">Men</Link></li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/grocery">Grocery</Link></li>
-
         <li>Women</li>
         <li><Link to = "/kid">Kids</Link></li>
         <li>Cart</li>
-        <button onClick={toggle}>{light}</button>
+        <button className="bg-purple-600 px-6 py-1 rounded-md text-white" onClick={toggle}>{light}</button>
       </ul>
     </div>
   )
