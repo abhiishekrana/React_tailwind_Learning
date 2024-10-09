@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import './ProductCard.css'
-import Product from "./Product";
+import Product, { HOF } from "./Product";
 import Skeleton from "./Skeleton";
 import { Link } from "react-router-dom";
 
@@ -298,6 +298,8 @@ const ProductCard = () => {
     }
   };
 
+  const HOFComponent = HOF(Product)
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -341,12 +343,14 @@ const ProductCard = () => {
         </div>
       
 
-      <div className="max-w-7xl mx-auto grid grid-cols-5 gap-2 mt-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-5 gap-2 mt-10 ">
         {/* <Product itsMyChoice={productList} /> */}
         {filterProduct.map((product, index) => {
           return (
             <Link key={product.id} to={`/product/${product.id}`}>
-              <Product itsMyChoice={product} />
+              {
+                product.rating.rate>=4?<HOFComponent product={product}/>:<Product product={product} />
+              }
             </Link>
           );
         })}

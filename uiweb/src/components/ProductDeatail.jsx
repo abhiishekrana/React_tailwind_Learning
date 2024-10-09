@@ -26,14 +26,16 @@ const ProductDeatail = () => {
     const{image,title,description,price} = singleProduct
 
   return (
-    <div className='flex flex-col items-center justify-center border border-gray-600 h-96 p-4 hover:bg-gray-200'>
-            
-    <img className='w-40' src={image}/>
-    <h1>{title}</h1>
-    <p>price:{singleProduct.price}</p>
-    <p>{description}</p>
-    <h2>Product details Page</h2>
+    <div className='max-w-5xl mx-auto mt-10'>
+      <div className='border border-gray-600 rounded-md p-5'> 
+    <img className='w-32' src={image}/>
+    <h1 className='font-bold text-xl'>{title}</h1>
+    <p className='font-bold text-gray-700'>price:{singleProduct.price}</p>
+    <p >{description}</p>
+    <h2 className='font-bold text-gray-700'>Product details Page</h2>
     </div>
+    </div>
+    
   );
 }
 
