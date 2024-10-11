@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 // import './ProductCard.css'
 import Product, { HOF } from "./Product";
 import Skeleton from "./Skeleton";
 import { Link } from "react-router-dom";
-
+import UserContest from "../utils/UserContext";
 const productList = [
   {
     id: 1,
@@ -273,6 +273,7 @@ const productList = [
   },
 ];
 const ProductCard = () => {
+  const user = useContext(UserContest);
   const [listOfProduct, setListOfProduct] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -339,6 +340,11 @@ const ProductCard = () => {
         >
           Top rated button
         </button>
+
+
+        <div>
+          <input className="border border-black m-5 p-2" type="text" value = {user.name} onChange={(e)=>user.setUserName(e.target.value)}/>
+        </div>
 
         </div>
       

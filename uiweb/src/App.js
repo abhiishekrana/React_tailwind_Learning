@@ -8,15 +8,20 @@ import Kid from './components/Kid';
 import Men from './components/Men';
 import ProductDeatail from './components/ProductDeatail';
 import About from './components/About';
+import { useState } from 'react';
+import UserContest from './utils/UserContext';
 // import Grocery from './components/Grocery';
 
 const Grocery = lazy(()=>import('./components/Grocery'))
 function App() {
+  const [userName,setUserName] = useState("Abhishek");
   return (
+    <UserContest.Provider value={{name:userName,setUserName}}>
     <div className="App">
       <Navbar />
       <Outlet/>
     </div>
+    </UserContest.Provider>
   );
 }
 

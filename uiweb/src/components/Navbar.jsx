@@ -1,8 +1,10 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 // import './Navbar.css'
 import {Link} from "react-router-dom"
+import UserContest from '../utils/UserContext'
 const Navbar = () => {
   const[light,setLight] = useState("Light")
+  const user = useContext(UserContest)
   const toggle=()=>{
     if(light=="Light"){
       setLight("Dark")
@@ -26,6 +28,7 @@ const Navbar = () => {
         <li>Women</li>
         <li><Link to = "/kid">Kids</Link></li>
         <li>Cart</li>
+        <li>{user.name}</li>
         <button className="bg-purple-600 px-6 py-1 rounded-md text-white" onClick={toggle}>{light}</button>
       </ul>
     </div>
