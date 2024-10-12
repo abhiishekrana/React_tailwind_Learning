@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import useSingleProduct from '../hook/useSingleProduct';
-
+import { addItems,removeItems,clearItems } from '../store/cartSlice';
+import { useDispatch } from 'react-redux';
 const ProductDeatail = () => {
 
     // const[singleProduct,setSingleProduct] = useState(null);
@@ -18,12 +19,25 @@ const ProductDeatail = () => {
     //      setSingleProduct(resData)
     //   };
     const singleProduct=useSingleProduct(project_id)
+    const dispatch = useDispatch();
 
     if(singleProduct===null){
         return <h1>Loading...</h1>
     }
 
     const{image,title,description,price} = singleProduct
+
+    const addCartItem =()=>{
+      dispatch(addItems(singleProduct));
+    }
+
+    const removeCartItem=()=>{
+      dispatch(removeItems());
+    }
+
+    const clearItem=()=>{
+      dispatch(clearItems());
+    }
 
   return (
     <div className='max-w-5xl mx-auto mt-10'>
@@ -33,6 +47,11 @@ const ProductDeatail = () => {
     <p className='font-bold text-gray-700'>price:{singleProduct.price}</p>
     <p >{description}</p>
     <h2 className='font-bold text-gray-700'>Product details Page</h2>
+    <button onClick={addCartItem} className='bg-purple-700 text-white rounded-md mt-1 p-1'>Add To Cart</button>
+    <button onClick={removeCartItem} className='bg-purple-700 text-white rounded-md mt-1 p-1 ml-2'>Remove to Cart</button>
+    <button onClick={clearItem} className='bg-purple-700 text-white rounded-md mt-1 p-1 ml-2'>Clear all Cart</button>
+
+
     </div>
     </div>
     

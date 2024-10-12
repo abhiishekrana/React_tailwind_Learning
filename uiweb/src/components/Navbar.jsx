@@ -2,6 +2,7 @@ import React,{useState,useEffect,useContext} from 'react'
 // import './Navbar.css'
 import {Link} from "react-router-dom"
 import UserContest from '../utils/UserContext'
+import { useSelector } from 'react-redux'
 const Navbar = () => {
   const[light,setLight] = useState("Light")
   const user = useContext(UserContest)
@@ -14,9 +15,11 @@ const Navbar = () => {
   }
 
   useEffect(()=>{
-    console.log("useEffect called");
-    
+  
   },[])
+
+  const cartItems = useSelector((store)=>store.cart.cartItems);
+
   return (
     
     <div className="flex justify-between mx-10 shadow-md my-10">
@@ -27,9 +30,9 @@ const Navbar = () => {
         <li><Link to="/grocery">Grocery</Link></li>
         <li>Women</li>
         <li><Link to = "/kid">Kids</Link></li>
-        <li>Cart</li>
+        <li className='bg-purple-600 px-6 py-1 rounded-md text-white mb-0.5'><Link to="/cart">Cart-{cartItems.length}</Link></li>
         <li>{user.name}</li>
-        <button className="bg-purple-600 px-6 py-1 rounded-md text-white" onClick={toggle}>{light}</button>
+        <button className="bg-purple-600 px-6 py-1 rounded-md text-white mb-0.5" onClick={toggle}>{light}</button>
       </ul>
     </div>
   )

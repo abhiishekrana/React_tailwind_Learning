@@ -10,18 +10,23 @@ import ProductDeatail from './components/ProductDeatail';
 import About from './components/About';
 import { useState } from 'react';
 import UserContest from './utils/UserContext';
+import {Provider} from 'react-redux'
 // import Grocery from './components/Grocery';
+import appStore from './store/store';
+import Cart from './components/Cart';
 
 const Grocery = lazy(()=>import('./components/Grocery'))
 function App() {
   const [userName,setUserName] = useState("Abhishek");
   return (
+    <Provider store={appStore}>
     <UserContest.Provider value={{name:userName,setUserName}}>
     <div className="App">
       <Navbar />
       <Outlet/>
     </div>
     </UserContest.Provider>
+    </Provider>
   );
 }
 
@@ -49,6 +54,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/men",
         element: <Men />,
+      },
+      {
+        path: "/cart",
+        element: <Cart/>,
       },{
         path: "/product/:id",
         element: <ProductDeatail />,
