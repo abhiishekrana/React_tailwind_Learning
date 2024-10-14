@@ -1,4 +1,5 @@
 import express from "express";
+import userRoute from "./routes/user_route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv"
@@ -23,6 +24,8 @@ const corsOptions = {
     credentials:true
 }
 app.use(cors(corsOptions));
+
+app.use("/api/v1/user",userRoute);
 const PORT = process.env.PORT||3000;
 app.listen(PORT,(req,res)=>{
     connectDB();
