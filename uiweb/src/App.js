@@ -15,6 +15,7 @@ import {Provider} from 'react-redux'
 import appStore from './store/store';
 import Cart from './components/Cart';
 import Memo from './components/Memo';
+import Login from './components/Login';
 
 const Grocery = lazy(()=>import('./components/Grocery'))
 function App() {
@@ -51,6 +52,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/grocery",
         element:<Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense> ,
+      },
+      {
+        path: "/login",
+        element:<Login/> ,
       },
       {
         path: "/men",
