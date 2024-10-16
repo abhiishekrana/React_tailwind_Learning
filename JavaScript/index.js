@@ -1,0 +1,20 @@
+cartMap=[
+    {
+        Student:"Abhishek",
+        id:"1234"
+    },
+    {
+        Student:"Abhijeet",
+        id:"123456"
+    },
+    {
+        Student:"Shiva",
+        id:"6523"
+    }
+];
+
+cartMap.filter((element,index)=>{
+    if(element.id>1234){
+        console.log(element.Student)
+    }
+})
