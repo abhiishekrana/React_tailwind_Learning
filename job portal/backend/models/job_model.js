@@ -7,7 +7,7 @@ const jobSchema = new mongoose.Schema({
     requirements:[{
         type:String
     }],
-    descriptions:{
+    description:{
         type:String,
         required:true
     },
@@ -43,7 +43,7 @@ const jobSchema = new mongoose.Schema({
     },
     applications:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Application',
+        ref:'Application'
     }]
 },{timestamps:true});
 

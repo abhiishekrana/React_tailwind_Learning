@@ -1,9 +1,9 @@
 import {Job} from "../models/job_model.js"
 export const postJob = async(req,res)=>{
     try{
-        const {title,descriptions,jobType,salary,location,experience,position,companyId,experienceLevel} = req.body;
+        const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
         const userId = req.id;
-        if(!title||!descriptions||!requiremets||!salary||!location||!jobType||!experience||!position||!companyId||!experienceLevel){
+        if(!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId){
             return res.status(400).json({
                 message:"Something is missing.",
                 success:false
@@ -11,15 +11,17 @@ export const postJob = async(req,res)=>{
         }   
         const job = await Job.create({
             title,
-            descriptions,
-            requirements,
-            salary:Number(salary),
+            description,
+            requirements: requirements.split(","),
+            salary: Number(salary),
             location,
             jobType,
-            experienceLevel,
-            company:companyId,
-            created_by:userId
+            experienceLevel: experience,
+            position,
+            company: companyId,
+            created_by: userId
         });
+
         return res.status(200).json({
             message:"Job created successfully",
             job,
@@ -30,7 +32,6 @@ export const postJob = async(req,res)=>{
     }
 }   
 
-
 export const getAllJobs = async(req,res)=>{
     try{
         const keyword = req.query.keyword||"";
@@ -40,7 +41,9 @@ export const getAllJobs = async(req,res)=>{
                 {descriptions:{$regex:keyword,$options:"i"}},
             ]
         };
-        const jobs = await Job.find(query)
+        const jobs = await Job.find(query).populate({
+            path:"company"
+        }).sort({createdAt:-1})
         if(!jobs){
             return res.status(404).json({
                 message:"Job not found",
@@ -51,7 +54,6 @@ export const getAllJobs = async(req,res)=>{
             jobs,
             success:true
         })
-
     }catch(error){
         console.log(error); 
     }
