@@ -1,5 +1,5 @@
+import Navbar from "@/components/shared/Navbar.jsx";
 import React from 'react'
-import Navbar from './assets/components/shared/Navbar'
 
 const App = () => {
   return (
