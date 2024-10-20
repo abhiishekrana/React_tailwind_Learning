@@ -2,50 +2,46 @@ import { user } from "../models/user_model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 
-export const register = async(req, res) => {
-    console.log(req.body)
+export const register = async (req, res) => {
     try {
-        const { fullName, email, phoneNumber, password, role } = req.body;
-
-        // Validate input data
-        if (!fullName || !email || !phoneNumber || !password || !role) {
+        const { fullname, email, phoneNumber, password, role } = req.body;
+         
+        if (!fullname || !email || !phoneNumber || !password || !role) {
             return res.status(400).json({
                 message: "Something is missing",
                 success: false
             });
-        }
+        };
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
-        // Check if user already exists
-        const user1 = await user.findOne({ email });
-        if (user1) {
+        const user = await User.findOne({ email });
+        if (user) {
             return res.status(400).json({
-                message: "User already exists",
-                success: false
-            });
+                message: 'User already exist with this email.',
+                success: false,
+            })
         }
-
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
-        
-        // Create user in the database
-        const newUser = await user.create({
-            fullName,
+
+        await User.create({
+            fullname,
             email,
             phoneNumber,
             password: hashedPassword,
             role,
+            profile:{
+                profilePhoto:cloudResponse.secure_url,
+            }
         });
-        // Return success response
-        return res.status(200).json({
+
+        return res.status(201).json({
             message: "Account created successfully.",
-            success: true,
+            success: true
         });
     } catch (error) {
-        console.error(error); // Log error for debugging
-        return res.status(500).json({
-            message: error.message || "Internal server error",
-            success: false
-        });
+        console.log(error);
     }
 }
 

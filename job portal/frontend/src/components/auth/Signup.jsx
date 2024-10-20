@@ -4,7 +4,10 @@ import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner"
+import { USER_API_END_POINT } from "@/utils/constant.js";
+import axios from "axios";
 const Signup = () => {
   const [input, setInput] = useState({
     fullname: "",
@@ -15,12 +18,42 @@ const Signup = () => {
     file: "",
   });
 
+  const navigate = useNavigate();
+
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files?.[0] });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();    //formdata object
+        formData.append("fullname", input.fullname);
+        formData.append("email", input.email);
+        formData.append("phoneNumber", input.phoneNumber);
+        formData.append("password", input.password);
+        formData.append("role", input.role);
+        if (input.file) {
+            formData.append("file", input.file);
+        }
+    try{
+      const res = await axios.post(`${USER_API_END_POINT}/register`,formData,{
+        headers:{
+          "Content-Type":"multipart/form-data"
+        },
+        withCredentials: true,
+      })
+      if(res.data.success){
+        navigate("/login")
+        toast(res.data.message)
+      }
+    }catch(error){
+      console.log(error);
+      toast.error(error.response.data.message)
+    }
   };
   return (
     <div>
@@ -72,12 +105,12 @@ const Signup = () => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <RadioGroup className="flex items-center gap-5">
+            <RadioGroup className="flex items-center gap-4 my-5">
               <div className="flex items-center space-x-2">
                 <Input
                   type="radio"
                   name="role"
-                  value="Student"
+                  value="student"
                   checked={input.role === "student"}
                   onChange={changeEventHandler}
                   className="cursor-pointer"
@@ -88,7 +121,7 @@ const Signup = () => {
                 <Input
                   type="radio"
                   name="role"
-                  value="Recruter"
+                  value="recruiter"
                   checked={input.role === "recruiter"}
                   onChange={changeEventHandler}
                   className="cursor-pointer"
