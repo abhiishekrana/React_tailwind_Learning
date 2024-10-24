@@ -1,5 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import { StarIcon, ShoppingBagIcon } from "@heroicons/react/24/solid";
+import { setAddItemToCart, setOpenCart } from "../../app/CartSlice";
+
 const Item = ({
   ifExists,
   id,
@@ -13,6 +17,8 @@ const Item = ({
   price,
 }) => {
   //   console.log(id)
+  const dispatch = useDispatch();
+
   const onAddToCart = () => {
     const item = { id, title, text, img, color, shadow, price };
 
@@ -37,7 +43,7 @@ const Item = ({
             ifExists ? "justify-items-start" : "justify-items-center"
           }`}
         >
-          <h1 className="text-slate-200 text-xl lg:text-lg md:text-base font-medium filter drop-shadow ">
+          <h1 className="text-slate-200 text-xl lg:text-lg md:text-base font-medium filter drop-shadow">
             {title}
           </h1>
           <p className="text-slate-200 filter drop-shadow text-base md:text-sm font-normal">
