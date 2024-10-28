@@ -1,6 +1,7 @@
 import User from "../models/user.model.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { sendWelcomeEmail } from "../email/emailHandlers.js";
 export const signup = async (req, res) => {
     try {
         const { name, username, email, password } = req.body;
@@ -39,7 +40,7 @@ export const signup = async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "3d" });
 
-        res.cookie("jwtLinkedIn", token, {
+        res.cookie("jwt-LinkedIn", token, {
             httpOnly: true,
             maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
             sameSite: "strict",
@@ -48,7 +49,16 @@ export const signup = async (req, res) => {
 
         res.status(201).json({ message: "User registered successfully" });
 
-    } catch (error) {
+        const profileUrl = process.env.CLIENT_URL+"/profile/"+user.username
+
+        try{
+            await sendWelcomeEmail(user.email,user.name,profileUrl)
+        }catch(error){
+            console.log("Error sending welcome email",error);
+        }
+
+
+    } catch (email) {
         console.log("Error in signup:", error);
         res.status(500).json({ message: "Internal server error" });
     }
@@ -60,5 +70,6 @@ export const login = (req,res)=>{
 }
 
 export const logout = (req,res)=>{
-    res.send("logout")
+    res.clearCookie("jwt-LinkedIn");
+    res.json({message:"Logged out successfully"});
 }
